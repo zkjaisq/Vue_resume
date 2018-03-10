@@ -1,0 +1,119 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+a {
+    color:  inherit;
+    text-decoration: none;
+}
+
+.page {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.page > aside {
+    box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, .2);
+    width: 100px;
+
+}
+
+.page > aside ul {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.page > aside ul > .wrapper {
+    flex-grow: 1;
+}
+
+.page > aside ul button {
+    padding: 20px 30px;
+    margin: 20px 0px;
+}
+
+.page > aside.active {
+    width: 300px;
+    display: block;
+}
+
+.page > .resume {
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, .2);
+    flex-grow: 1;
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    overflow: auto;
+}
+
+.page > .resume aside {
+    margin-left: 1px;
+    width: 200px;
+    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, .1);
+
+}
+
+.page > .resume > aside > .imge {
+    width: 100px;
+    height: 100px;
+    border: 1px solid red;
+    margin: 20px auto;
+}
+
+.page > .resume > aside > .message {
+    text-align: left;
+
+}
+
+.page > .resume .message h3 {
+    text-align: center;
+    padding: 10px 5px;
+
+}
+
+.page > .resume .message li {
+    padding: 10px 5px;
+    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, .2);
+    margin-top: 5px;
+}
+
+.page > .resume main {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.page > .resume main .skills > ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.page > .resume main .skills li {
+    border: 1px solid red;
+    width: 49%;
+    padding: 10px 5px;
+    margin-top: 10px;
+}
+
+.page > .resume main .project {
+    padding-top: 20px;
+
+}
+
+.page > .resume main .project li {
+    border: 1px solid red;
+    padding: 20px 10px;
+    margin-top: 10px;
+}

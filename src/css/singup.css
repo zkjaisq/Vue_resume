@@ -1,0 +1,34 @@
+.sing_up{
+    position: fixed;
+    height:100%;
+    width:100%;
+    top:0;
+    left:0;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sing_up form{
+    min-width:300px;
+    min-height: 400px;
+    background-color: #DDDDDD;
+}
+
+.sing_up form  .row span{
+    width: 4em;
+
+}
+.sing_up form label{
+    display: flex;
+    justify-content: flex-start;
+}
+.sing_up form input{
+    font-size: 14px;
+    outline: none;
+    border:1px solid #DDDDDD;
+    border-radius: 3px;
+}
+.sing_up form input:focus{
+    border:1px solid deepskyblue;
+}
