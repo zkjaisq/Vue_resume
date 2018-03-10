@@ -13,6 +13,16 @@
                 telphone: '18771964684',
                 email: 'charityjia@Gmail.com',
                 produce: '个人介绍'
+            },
+            login:{
+                email:'',
+                passwor:'',
+
+            },
+            singUp:{
+                email:'',
+                password:'',
+                configPassword:''
             }
         },
         methods: {
@@ -20,24 +30,9 @@
                 this.resume[key] = value
             },
             onClicksave(){
-                /*console.log(this.resume);
-                // 声明类型
-                let User = AV.Object.extend('User');
-                // 新建对象
-                let user = new User();
-                // 设置名称
-                user.set('resume',this.resume);
-                // 设置优先级
-                user.set('priority',1);
-                user.save().then(function (todo) {
-                    console.log('objectId is ' + todo.id);
-                }, function (error) {
-                    console.error(error);
-                });*/
                 let  currentUser = AV.User.current();
-                console.log(currentUser)
                 if (!currentUser) {
-                    this.loginVisible =true
+                    this.singupVisible = true
                 }
                 else {
                     this.saveResume()
@@ -46,7 +41,46 @@
             },
             saveResume(){
 
+                let {id} = AV.User.current()
+                // 第一个参数是 className，第二个参数是 objectId
+                var todo = AV.Object.createWithoutData('User',id);
+                // 修改属性
+                todo.set('resume', this.resume);
+                // 保存到云端
+                todo.save();
             },
+            onLogin(){
+                console.log(this.login);
+                AV.User.logIn(this.login.email, this.login.password).then(function (user) {
+                    console.log(user);
+                    alert('登录成功')
+                    this.data.loginVisible = true
+                }, function (error) {
+                    console.log(error.code)
+                    if(error.code === 211){
+                        alert('用户不存在')
+                    }else if(error.code === 210){
+                        alert('密码错误')
+                    }
+                });
+            },
+            onsingUp(e){
+                console.log(this.singUp);
+                // 新建 AVUser 对象实例
+                let user = new AV.User();
+                // 设置用户名
+                user.setUsername(this.singUp.email);
+                console.log(this.singUp.email);
+                // 设置密码
+                user.setPassword(this.singUp.password);
+                // 设置邮箱
+                user.setEmail(this.singUp.email);
+                user.signUp().then(function (user) {
+                    console.log(user);
+                    alert('注册成功')
+                }, function (error) {
+                });
+            }
 
         },
 
