@@ -1,10 +1,14 @@
 {
-    let vm = new Vue({
+    let app = new Vue({
         el: '#app',
         data: {
             loginVisible:false,
             editingName: false,
             singupVisible:false,
+            currentUser:{
+                id:undefined,
+                email:undefined
+            },
             resume: {
                 name: '张科家',
                 birthday: '1995.10.02',
@@ -32,7 +36,7 @@
             onClicksave(){
                 let  currentUser = AV.User.current();
                 if (!currentUser) {
-                    this.singupVisible = true
+                    this.loginVisible = true
                 }
                 else {
                     this.saveResume()
@@ -50,10 +54,13 @@
             },
             onLogin(){
                 console.log(this.login);
-                AV.User.logIn(this.login.email, this.login.password).then(function (user) {
+                AV.User.logIn(this.login.email, this.login.password).then( (user)=> {
                     console.log(user);
                     alert('登录成功')
-                    this.data.loginVisible = true
+                    this.loginVisible = false
+                    this.currentUser.id = user.id
+                    this.currentUser.email = user.attributes.email
+                    console.log(this.currentUser)
                 }, function (error) {
                     console.log(error.code)
                     if(error.code === 211){
@@ -83,11 +90,18 @@
             onLogout(){
                 AV.User.logOut();
                 // 现在的 currentUser 是 null 了
-                var currentUser = AV.User.current();
+                let currentUser = AV.User.current();
+                alert('注销成功')
                 console.log(currentUser);
             }
 
         },
 
     })
+    let currentUser = AV.User.current()
+    if(currentUser){
+        console.log(currentUser);
+        app.currentUser = currentUser
+    }
+
 }

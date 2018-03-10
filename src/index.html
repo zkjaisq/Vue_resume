@@ -29,7 +29,7 @@
                 </li>
             </div>
             <li>
-                <button @click="onLogout">登出</button>
+                <button @click="onLogout" v-show="currentUser.id">登出</button>
             </li>
         </ul>
     </aside>
@@ -59,6 +59,7 @@
             </section>
         </aside>
         <main>
+                {{currentUser}}
             <section class="produce">
                 <!--editabel组件中使用v-bind传入一个value值，Vue实例中的name值-->
                 <editabel-span :value="resume.name" @edit="onEdit('name',$event)"></editabel-span>
