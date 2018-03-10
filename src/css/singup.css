@@ -32,3 +32,6 @@
 .sing_up form input:focus{
     border:1px solid deepskyblue;
 }
+div[v-cloak]{
+    display: none;
+}

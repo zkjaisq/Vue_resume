@@ -40,7 +40,6 @@
                 }
             },
             saveResume(){
-
                 let {id} = AV.User.current()
                 // 第一个参数是 className，第二个参数是 objectId
                 var todo = AV.Object.createWithoutData('User',id);
@@ -80,6 +79,12 @@
                     alert('注册成功')
                 }, function (error) {
                 });
+            },
+            onLogout(){
+                AV.User.logOut();
+                // 现在的 currentUser 是 null 了
+                var currentUser = AV.User.current();
+                console.log(currentUser);
             }
 
         },

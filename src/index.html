@@ -29,7 +29,7 @@
                 </li>
             </div>
             <li>
-                <button>登出</button>
+                <button @click="onLogout">登出</button>
             </li>
         </ul>
     </aside>
@@ -87,7 +87,7 @@
             </section>
         </main>
     </div>
-    <div class="login" v-show="loginVisible">
+    <div class="login" v-show="loginVisible" v-cloak>
         <form  @submit.prevent="onLogin">
             <h2>登录</h2>
             <div class="row">
@@ -107,7 +107,7 @@
             <a href="" @click.prevent="singupVisible=!singupVisible;loginVisible = false">注册</a>
         </form>
     </div>
-    <div class="sing_up" v-show="singupVisible">
+    <div class="sing_up" v-show="singupVisible" v-cloak>
         <form @submit.prevent="onsingUp">
             <h2>注册</h2>
             <div class="row"></div>
