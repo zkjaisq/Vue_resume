@@ -14,7 +14,7 @@
 <body>
 <div class="page" id="app">
     <sider  :object-id="currentUser.objectId" v-show="mode === 'edite'" @clicksave="onClicksave" @print="onPrint" @logout="onLogout" @share="onShare"></sider>
-    <resume :display-resume="displayResume" :mode="mode"></resume>
+    <resume :display-resume="displayResume" :mode="mode" :resume="resume"></resume>
     <login v-show="loginVisible" @login="onLogin"  @close="loginVisible=false"  @gotosingup="singup" ></login>
     <singup  v-show="singupVisible" @gotologin="login" @singUp="onSingup"></singup>
    <share :share_link="shareLink" v-show="shareVisible"></share>
@@ -22,6 +22,7 @@
 </body>
 <script src="../vendors/av-min.js"></script>
 <script src="../vendors/vue.min.js"></script>
+<script src="../vendors/vue-router.min.js"></script>
 <script src="./js/initav.js"></script>
 <script>
     /*  var TestObject = AV.Object.extend('TestObject');
@@ -39,5 +40,5 @@
 <script src="./js/share.js"></script>
 <script src="./js/aside.js"></script>
 <script src="./js/app.js"></script>
-
+<script src="./js/router.js"></script>
 </html>

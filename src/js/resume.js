@@ -1,5 +1,11 @@
 Vue.component('resume',{
-    props:['displayResume','mode'],
+    //需要什么数据就从app那里传进来什么数据。
+    props:['displayResume','mode','resume'],
+    data(){
+        return {
+
+        }
+    },
     template:`
    <div class="resume">
         <aside>
