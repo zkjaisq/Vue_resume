@@ -13,108 +13,11 @@
 </head>
 <body>
 <div class="page" id="app">
-    <aside v-show="mode !== 'preview' ">
-        <ul>
-            <div class="wrapper">
-                <li>
-                    <button @click="onClicksave">保存</button>
-                </li>
-                <li>
-                    <button @click="onPrint">打印</button>
-                </li>
-                <li>
-                    <button>换肤</button>
-                </li>
-                <li>
-                    <button @click="shareVisible = true">分享</button>
-                </li>
-            </div>
-            <li>
-                <button @click="onLogout" v-show="currentUser.objectId">登出</button>
-            </li>
-        </ul>
-    </aside>
-    <div class="resume">
-        <aside>
-            <div class="imge"></div>
-            <section class="message">
-                <h3>基本信息</h3>
-                <ul>
-                    <li>
-                        <editabel-span :disabled="mode === 'preview'" :value="displayResume.birthday"
-                                       @edit="onEdit('birthday',$event)">
-                        </editabel-span>
-                    </li>
-                    <li>
-                        <editabel-span :disabled="mode === 'preview'" :value="displayResume.address"
-                                       @edit="onEdit('address',$event)">
-                        </editabel-span>
-                    </li>
-                    <li>
-                        <editabel-span :disabled="mode === 'preview'" :value="displayResume.telphone"
-                                       @edit="onEdit('telphone',$event)">
-                        </editabel-span>
-                    </li>
-                    <li>
-                        <editabel-span :disabled="mode === 'preview'" :value="displayResume.email"
-                                       @edit="onEdit('email',$event)">
-                        </editabel-span>
-                    </li>
-                </ul>
-            </section>
-        </aside>
-        <main>
-            <section class="produce">
-                <!--editabel组件中使用v-bind传入一个value值，Vue实例中的name值-->
-                <editabel-span :disabled="mode === 'preview'" :value="displayResume.name"
-                               @edit="onEdit('name',$event)"></editabel-span>
-                <p>
-                    <editabel-span :disabled="mode === 'preview'" :value="displayResume.produce"
-                                   @edit="onEdit('produce',$event)"></editabel-span>
-                </p>
-            </section>
-            <section class="skills">
-                <h3>技能</h3>
-                <ul>
-                    <li v-for="skill,index in displayResume.skilles">
-                        <editabel-span :disabled="mode === 'preview'" :value="skill.name"
-                                       @edit="onEdit(`skilles[${index}].name`,$event)"></editabel-span>
-                        <div>
-                            <editabel-span :disabled="mode === 'preview'" :value="skill.descript"
-                                           @edit="onEdit(`skilles[${index}].descript`,$event)"></editabel-span>
-                        </div>
-                        <span v-if="index>=4&&mode==='edite'" @click="removeSkills(index)">x</span>
-                    </li>
-                    <li @click="addSkill" v-if="mode === 'edite'">添加</li>
-                </ul>
-            </section>
-            <section class="project">
-                <h3>项目经验</h3>
-                <ul>
-                    <li v-for="project,index in displayResume.projectes">
-                        <div>
-                            <h3>
-                                <editabel-span :disabled="mode === 'preview'" :value="project.name"
-                                               @edit="onEdit(`projectes[${index}].name`,$event)"></editabel-span>
-                            </h3>
-                            <editabel-span :disabled="mode === 'preview'" :value="project.link"
-                                           @edit="onEdit(`projectes[${index}].link`,$event)"></editabel-span>
-                        </div>
-                        <div>
-                            <editabel-span :disabled="mode === 'preview'" :value="project.descript"
-                                           @edit="onEdit(`projectes[${index}].descript`,$event)"></editabel-span>
-                        </div>
-                        <span v-if="index >=4 && mode==='edite'" @click="removeProject(index)">x</span>
-                    </li>
-                    <li v-if="mode === 'edite'" @click="addProject">添加</li>
-                </ul>
-            </section>
-        </main>
-    </div>
-
-    <login v-show="loginVisible"></login>
-    <singup  v-show="singupVisible"></singup>
-   <share v-show="shareVisible"></share>
+    <sider  :object-id="currentUser.objectId" v-show="mode === 'edite'" @clicksave="onClicksave" @print="onPrint" @logout="onLogout" @share="onShare"></sider>
+    <resume :display-resume="displayResume" :mode="mode"></resume>
+    <login v-show="loginVisible" @login="onLogin"  @close="loginVisible=false"  @gotosingup="singup" ></login>
+    <singup  v-show="singupVisible" @gotologin="login" @singUp="onSingup"></singup>
+   <share :share_link="shareLink" v-show="shareVisible"></share>
 </div>
 </body>
 <script src="../vendors/av-min.js"></script>
@@ -130,9 +33,11 @@
       })*/
 </script>
 <script src="./js/editabel-span.js"></script>
-<script src="./js/app.js"></script>
+<script src="./js/resume.js"></script>
 <script src="./js/login.js"></script>
 <script src="./js/singup.js"></script>
 <script src="./js/share.js"></script>
+<script src="./js/aside.js"></script>
+<script src="./js/app.js"></script>
 
 </html>
