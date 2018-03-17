@@ -15,8 +15,8 @@
 <div class="page" id="app">
     <sider  :object-id="currentUser.objectId" v-show="mode === 'edite'" @clicksave="onClicksave" @print="onPrint" @logout="onLogout" @share="onShare"></sider>
     <resume :display-resume="displayResume" :mode="mode" :resume="resume"></resume>
-    <login v-show="loginVisible" @login="onLogin"  @close="loginVisible=false"  @gotosingup="singup" ></login>
-    <singup  v-show="singupVisible" @gotologin="login" @singUp="onSingup"></singup>
+    <login v-show="loginVisible" @login="onLogin"  @close="loginVisible=false"  @gotosingup="singup"></login>
+    <singup  v-show="singupVisible" @gotologin="login" @singup="onsingUp" @closer="closer" ></singup>
    <share :share_link="shareLink" v-show="shareVisible"></share>
 </div>
 </body>

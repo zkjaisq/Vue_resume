@@ -43,10 +43,11 @@
         //在methods的同级写一个watch，用来监听data的属性的变化，当检查到变化的时候执行一个函数的操作。
         watch:{
             'currentUser.objectId':function (newValue,oldValue) {
-                console.log(newValue);
                 if(newValue){
                     console.log(newValue);
+                    console.log(this.currentUser);
                     this.findResume(this.currentUser).then((resume)=>{
+                        console.log(resume);
                         this.resume=resume
                     })
                 }
@@ -55,7 +56,9 @@
         //计算属性,是一个属性
         computed:{
             displayResume(){
-               let a =   this.mode === 'preview' ? this.previewResume : this.resume
+                console.log(this.resume)
+                console.log(this.mode);
+                let a =   this.mode === 'preview' ? this.previewResume : this.resume
                 console.log(a)
                 return a
 
@@ -70,13 +73,29 @@
                 this.loginVisible = false
                 let currentUser = AV.User.current()
             },
-            onSingup(user){
+            onsingUp(user){
+                console.log(user);
                 this.currentUser.objectId = user.objectId
                 this.currentUser.email = user.email
+                console.log(1111);
+                this.singupVisible = false
+                console.log(444444);
+
+                console.log(this.currentUser);
+                let currentUser = AV.User.current()
+                this.saveResume()
+                this.findResume(this.currentUser).then((resume)=>{
+                    console.log(resume);
+                    this.resume=resume
+                })
+
             },
             singup(){
-
-                this.singupVisible=true
+                this.loginVisible = false
+                this.singupVisible = true
+            },
+            closer(){
+                this.singupVisible = false
             },
             login(){
                 console.log(2);
@@ -114,15 +133,16 @@
                 // 现在的 currentUser 是 null 了
                 let currentUser = AV.User.current();
                 alert('注销成功')
-                console.log(1);
-                console.log(currentUser);
             },
             findResume(user){
                 var query = new AV.Query('User');
                 return query.get(user.objectId).then( (user)=> {
+                    console.log(user);
                     let resume = user.toJSON().resume
-                  return resume
+                    console.log(resume);
+                    return resume
                 }, function (error) {
+                    console.log(error);
                     // 异常处理
                 });
             },
@@ -151,7 +171,7 @@
             app.resume = resume
         })
     }else{
-        console.log(app.resume);
+
     }
 
 
@@ -165,7 +185,6 @@
         app.mode = 'preview'
         console.log('preview' + userId )
         app.findResume({objectId: userId}).then(resume => {
-            console.log(resume)
             app.previewResume = resume
             console.log(app.previewResume)
         })

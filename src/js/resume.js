@@ -1,6 +1,6 @@
 Vue.component('resume',{
-    //需要什么数据就从app那里传进来什么数据。
-    props:['displayResume','mode','resume'],
+    //需要什么数据就从app那里传过来
+    props:['displayResume','mode',],
     data(){
         return {
 
@@ -92,16 +92,16 @@ Vue.component('resume',{
     },
     methods:{
         addSkill(){
-            this.resume.skilles.push({name:'请填写对象',descript:'请填写技能描述'})
+            this.displayResume.skilles.push({name:'请填写对象',descript:'请填写技能描述'})
         },
         removeSkills(index){
-            this.resume.skilles.splice(index,1)
+            this.displayResume.skilles.splice(index,1)
         },
         addProject(){
-            this.resume.projectes.push({name:'请填写项目名称',link:'请填写连接',descript:'项目描述'})
+            this.displayResume.projectes.push({name:'请填写项目名称',link:'请填写连接',descript:'项目描述'})
         },
         removeProject(index){
-            this.resume.projectes.splice(index,1)
+            this.displayResume.projectes.splice(index,1)
         },
         onEdit(key, value) {
             console.log(key);
@@ -113,11 +113,11 @@ Vue.component('resume',{
             })
             console.log(key)//skills.0.name
             let keys = key.split('.')
-            let result = this.resume
+            let result = this.displayResume
             for(let i =0;i <keys.length;i++){
                 if(i === keys.length - 1){
                     result[keys[i]] = value//话内存图可以直到最后一次的是一个常量的
-                    console.log(this.resume);
+
                 }else{
                     //i = 0 result = resume.skilles
                     // i = 1 result = resume.skilles[0]

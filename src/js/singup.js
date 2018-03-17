@@ -21,9 +21,9 @@
                 user.setEmail(this.singUp.email);
                 user.signUp().then( (user)=> {
                     alert('注册成功')
-                    this.singupVisible = false
                     user = user.toJSON()
-                   this.$emit('singUp',user)
+                    console.log(user);
+                    this.$emit('singup',user)
                 }, function (error) {
                     alert(error.rawMessage)
 
@@ -56,7 +56,7 @@
                     <input type="password" placeholder="请确认密码" v-model="singUp.configPassword">
                 </label>
             </div>
-            <button @click.prevent="singupVisible=false">关闭</button>
+            <button @click="$emit('closer')" type="button">关闭</button>
             <button type="submit">提交</button>
             <a href="" @click.prevent="singupVisible=false;loginVisible=true" @click="onclickLogin">登录</a>
         </form>
